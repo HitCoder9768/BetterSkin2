@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/gui_root.gd" type="Script" id=1]
 [ext_resource path="res://arts/icons.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/global_dialogs/open_png_dialog.gd" type="Script" id=9]
 [ext_resource path="res://assets/global_dialogs/export_png_dialog.gd" type="Script" id=10]
 [ext_resource path="res://assets/layer_dropdown/layer_dropdown.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/skin_library/skin_library.tscn" type="PackedScene" id=12]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 3.0
@@ -240,36 +241,47 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SettingsSplit" type="VSplitContainer" parent="VBox/MainSplit"]
-margin_right = 310.0
+[node name="HSplitContainer" type="HSplitContainer" parent="VBox/MainSplit"]
+margin_right = 322.0
+margin_bottom = 482.0
+
+[node name="SettingsSplit" type="VSplitContainer" parent="VBox/MainSplit/HSplitContainer"]
+margin_right = 114.0
 margin_bottom = 482.0
 split_offset = 40
 
-[node name="ColorSelector" parent="VBox/MainSplit/SettingsSplit" instance=ExtResource( 6 )]
-margin_right = 310.0
+[node name="ColorSelector" parent="VBox/MainSplit/HSplitContainer/SettingsSplit" instance=ExtResource( 6 )]
+margin_right = 114.0
 margin_bottom = 272.0
 
-[node name="ToolSplit" type="VSplitContainer" parent="VBox/MainSplit/SettingsSplit"]
+[node name="ToolSplit" type="VSplitContainer" parent="VBox/MainSplit/HSplitContainer/SettingsSplit"]
 margin_top = 284.0
-margin_right = 310.0
+margin_right = 114.0
 margin_bottom = 482.0
 split_offset = 70
 
-[node name="ToolSelector" parent="VBox/MainSplit/SettingsSplit/ToolSplit" instance=ExtResource( 7 )]
+[node name="ToolSelector" parent="VBox/MainSplit/HSplitContainer/SettingsSplit/ToolSplit" instance=ExtResource( 7 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 310.0
+margin_right = 114.0
 margin_bottom = 108.0
 
-[node name="ToolSettingsPanel" parent="VBox/MainSplit/SettingsSplit/ToolSplit" instance=ExtResource( 4 )]
+[node name="ToolSettingsPanel" parent="VBox/MainSplit/HSplitContainer/SettingsSplit/ToolSplit" instance=ExtResource( 4 )]
 margin_top = 120.0
-margin_right = 310.0
+margin_right = 114.0
 margin_bottom = 198.0
+
+[node name="Control" parent="VBox/MainSplit/HSplitContainer" instance=ExtResource( 12 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 126.0
+margin_right = 322.0
+margin_bottom = 482.0
 
 [node name="MainViewport" parent="VBox/MainSplit" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 322.0
+margin_left = 334.0
 margin_right = 954.0
 margin_bottom = 482.0
 
@@ -387,8 +399,8 @@ mode = 1
 access = 2
 filters = PoolStringArray( "*.png; PNG Files" )
 show_hidden_files = true
-current_dir = "/Toby/Documents/MY OWN FILES/Programming/BetterSkin2"
-current_path = "/Toby/Documents/MY OWN FILES/Programming/BetterSkin2/"
+current_dir = "/home/hitcoder/BetterSkin2"
+current_path = "/home/hitcoder/BetterSkin2/"
 script = ExtResource( 9 )
 
 [node name="ExportPNGDialog" type="FileDialog" parent="GlobalDialogs"]
@@ -406,8 +418,8 @@ resizable = true
 access = 2
 filters = PoolStringArray( "*.png; PNG Files" )
 show_hidden_files = true
-current_dir = "/Toby/Documents/MY OWN FILES/Programming/BetterSkin2"
-current_path = "/Toby/Documents/MY OWN FILES/Programming/BetterSkin2/"
+current_dir = "/home/hitcoder/BetterSkin2"
+current_path = "/home/hitcoder/BetterSkin2/"
 script = ExtResource( 10 )
 
 [node name="PreferencesDialog" type="WindowDialog" parent="GlobalDialogs"]
