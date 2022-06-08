@@ -45,9 +45,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBox" type="VBoxContainer" parent="."]
 margin_left = 3.0
@@ -399,8 +396,8 @@ mode = 1
 access = 2
 filters = PoolStringArray( "*.png; PNG Files" )
 show_hidden_files = true
-current_dir = "/home/hitcoder/BetterSkin2"
-current_path = "/home/hitcoder/BetterSkin2/"
+current_dir = "/home/hitcoder/Documents/GodotProjects/BetterSkin2"
+current_path = "/home/hitcoder/Documents/GodotProjects/BetterSkin2/"
 script = ExtResource( 9 )
 
 [node name="ExportPNGDialog" type="FileDialog" parent="GlobalDialogs"]
@@ -418,8 +415,8 @@ resizable = true
 access = 2
 filters = PoolStringArray( "*.png; PNG Files" )
 show_hidden_files = true
-current_dir = "/home/hitcoder/BetterSkin2"
-current_path = "/home/hitcoder/BetterSkin2/"
+current_dir = "/home/hitcoder/Documents/GodotProjects/BetterSkin2"
+current_path = "/home/hitcoder/Documents/GodotProjects/BetterSkin2/"
 script = ExtResource( 10 )
 
 [node name="PreferencesDialog" type="WindowDialog" parent="GlobalDialogs"]

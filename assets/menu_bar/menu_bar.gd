@@ -48,7 +48,6 @@ func _on_file_menu_id_pressed(id: int):
 			pass
 		CST.MainMenuID.FILE_OPEN:
 			# open
-			_open_file()
 			pass
 		CST.MainMenuID.FILE_SAVE:
 			# save
@@ -84,15 +83,4 @@ func _on_settings_menu_id_pressed(id: int):
 			SettingsManager.open_preferences()
 
 func _on_help_menu_id_pressed(id: int):
-	pass
-
-func _open_file():
-	var fdialog = FileDialog.new()
-	fdialog.mode = FileDialog.MODE_OPEN_FILE
-	fdialog.add_filter("*.png ; PNG Images")
-	fdialog.access = FileDialog.ACCESS_FILESYSTEM
-	add_child(fdialog)
-	fdialog.popup_centered_ratio()
-	
-	print(yield(fdialog, "file_selected"))
 	pass
