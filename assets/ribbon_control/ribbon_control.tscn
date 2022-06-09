@@ -1,0 +1,161 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://tab_container_margin.tres" type="Theme" id=1]
+[ext_resource path="res://arts/Icon_ActionFolder_Paper.png" type="Texture" id=2]
+[ext_resource path="res://arts/Icon_KeyUp.png" type="Texture" id=3]
+[ext_resource path="res://arts/Icon_Undo.png" type="Texture" id=4]
+[ext_resource path="res://arts/Icon_Select_Rectangle.png" type="Texture" id=5]
+[ext_resource path="res://arts/Icon_Save_Modern.png" type="Texture" id=6]
+[ext_resource path="res://Icon_Help.png" type="Texture" id=7]
+[ext_resource path="res://arts/Icon_SaveAs_Modern.png" type="Texture" id=8]
+[ext_resource path="res://arts/Icon_Select_None.png" type="Texture" id=9]
+[ext_resource path="res://arts/Icon_NewPlus.png" type="Texture" id=10]
+[ext_resource path="res://arts/Icon_Redo.png" type="Texture" id=11]
+[ext_resource path="res://arts/Icon_SettingsWindow.png" type="Texture" id=12]
+[ext_resource path="res://arts/Icon_KeyDown.png" type="Texture" id=13]
+[ext_resource path="res://arts/Icon_AddLayer.png" type="Texture" id=14]
+[ext_resource path="res://assets/ribbon_control/ribbon_control.gd" type="Script" id=15]
+
+[node name="RibbonControl" type="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 0.178
+margin_bottom = -0.120003
+theme = ExtResource( 1 )
+tab_align = 0
+script = ExtResource( 15 )
+
+[node name="File" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="ButtonNew" type="ToolButton" parent="File"]
+margin_right = 61.0
+margin_bottom = 60.0
+text = "New"
+icon = ExtResource( 10 )
+
+[node name="ButtonOpen" type="ToolButton" parent="File"]
+margin_left = 65.0
+margin_right = 133.0
+margin_bottom = 60.0
+text = "Open"
+icon = ExtResource( 2 )
+
+[node name="ButtonSave" type="ToolButton" parent="File"]
+margin_left = 137.0
+margin_right = 199.0
+margin_bottom = 60.0
+text = "Save"
+icon = ExtResource( 6 )
+
+[node name="ButtonSaveAs" type="ToolButton" parent="File"]
+margin_left = 203.0
+margin_right = 297.0
+margin_bottom = 60.0
+text = "Save As..."
+icon = ExtResource( 8 )
+
+[node name="VSeparator" type="VSeparator" parent="File"]
+margin_left = 301.0
+margin_right = 305.0
+margin_bottom = 60.0
+
+[node name="ButtonImport" type="ToolButton" parent="File"]
+margin_left = 309.0
+margin_right = 386.0
+margin_bottom = 60.0
+text = "Import"
+icon = ExtResource( 3 )
+
+[node name="ButtonExport" type="ToolButton" parent="File"]
+margin_left = 390.0
+margin_right = 463.0
+margin_bottom = 60.0
+text = "Export"
+icon = ExtResource( 13 )
+
+[node name="Edit" type="HBoxContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="ButtonUndo" type="ToolButton" parent="Edit"]
+margin_right = 67.0
+margin_bottom = 60.0
+text = "Undo"
+icon = ExtResource( 4 )
+
+[node name="ButtonRedo" type="ToolButton" parent="Edit"]
+margin_left = 71.0
+margin_right = 136.0
+margin_bottom = 60.0
+text = "Redo"
+icon = ExtResource( 11 )
+
+[node name="VSeparator" type="VSeparator" parent="Edit"]
+margin_left = 140.0
+margin_right = 144.0
+margin_bottom = 60.0
+
+[node name="ButtonSelectAll" type="ToolButton" parent="Edit"]
+margin_left = 148.0
+margin_right = 241.0
+margin_bottom = 60.0
+text = "Select All"
+icon = ExtResource( 5 )
+
+[node name="ButtonSelectNone" type="ToolButton" parent="Edit"]
+margin_left = 245.0
+margin_right = 355.0
+margin_bottom = 60.0
+text = "Select None"
+icon = ExtResource( 9 )
+
+[node name="VSeparator2" type="VSeparator" parent="Edit"]
+margin_left = 359.0
+margin_right = 363.0
+margin_bottom = 60.0
+
+[node name="ButtonAddLayer" type="ToolButton" parent="Edit"]
+margin_left = 367.0
+margin_right = 463.0
+margin_bottom = 60.0
+text = "Add Layer"
+icon = ExtResource( 14 )
+
+[node name="Tools" type="HBoxContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="ButtonPreferences" type="ToolButton" parent="Tools"]
+margin_right = 109.0
+margin_bottom = 60.0
+text = "Preferences"
+icon = ExtResource( 12 )
+
+[node name="ButtonHelp" type="ToolButton" parent="Tools"]
+margin_left = 113.0
+margin_right = 176.0
+margin_bottom = 60.0
+text = "Help"
+icon = ExtResource( 7 )
+
+[connection signal="pressed" from="File/ButtonNew" to="." method="_on_ButtonNew_pressed"]
+[connection signal="pressed" from="File/ButtonOpen" to="." method="_on_ButtonOpen_pressed"]
+[connection signal="pressed" from="File/ButtonSave" to="." method="_on_ButtonSave_pressed"]
+[connection signal="pressed" from="File/ButtonSaveAs" to="." method="_on_ButtonSaveAs_pressed"]
+[connection signal="pressed" from="File/ButtonImport" to="." method="_on_ButtonImport_pressed"]
+[connection signal="pressed" from="File/ButtonExport" to="." method="_on_ButtonExport_pressed"]

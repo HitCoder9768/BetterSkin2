@@ -9,9 +9,6 @@ rect_min_size = Vector2( 64, 128 )
 size_flags_vertical = 3
 ratio = 0.5
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Control" type="Control" parent="."]
 margin_right = 64.0

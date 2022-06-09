@@ -11,6 +11,8 @@
 [ext_resource path="res://assets/global_dialogs/open_png_dialog.gd" type="Script" id=9]
 [ext_resource path="res://assets/global_dialogs/export_png_dialog.gd" type="Script" id=10]
 [ext_resource path="res://assets/layer_dropdown/layer_dropdown.tscn" type="PackedScene" id=11]
+
+[ext_resource path="res://assets/ribbon_control/ribbon_control.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/save_skin_dialog.gd" type="Script" id=12]
 [ext_resource path="res://assets/open_skin_dialog.gd" type="Script" id=13]
 
@@ -46,9 +48,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBox" type="VBoxContainer" parent="."]
 margin_left = 3.0
@@ -59,12 +58,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="RibbonControl" parent="VBox" instance=ExtResource( 12 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 954.0
+margin_bottom = 62.0
+
 [node name="MenuBar" parent="VBox" instance=ExtResource( 8 )]
+visible = false
+margin_top = 66.0
+margin_bottom = 86.0
 
 [node name="ConvenientBar" type="HBoxContainer" parent="VBox"]
-margin_top = 24.0
+visible = false
+margin_top = 66.0
 margin_right = 954.0
-margin_bottom = 48.0
+margin_bottom = 90.0
 
 [node name="ButtonNew" type="TextureButton" parent="VBox/ConvenientBar"]
 margin_right = 20.0
@@ -232,7 +241,7 @@ margin_right = 954.0
 items = [ "LayerChooser", null, false, 0, null ]
 
 [node name="MainSplit" type="HSplitContainer" parent="VBox"]
-margin_top = 52.0
+margin_top = 66.0
 margin_right = 954.0
 margin_bottom = 534.0
 size_flags_horizontal = 3
@@ -244,7 +253,7 @@ __meta__ = {
 
 [node name="SettingsSplit" type="VSplitContainer" parent="VBox/MainSplit"]
 margin_right = 310.0
-margin_bottom = 482.0
+margin_bottom = 468.0
 split_offset = 40
 
 [node name="ColorSelector" parent="VBox/MainSplit/SettingsSplit" instance=ExtResource( 6 )]
@@ -254,7 +263,7 @@ margin_bottom = 272.0
 [node name="ToolSplit" type="VSplitContainer" parent="VBox/MainSplit/SettingsSplit"]
 margin_top = 284.0
 margin_right = 310.0
-margin_bottom = 482.0
+margin_bottom = 468.0
 split_offset = 70
 
 [node name="ToolSelector" parent="VBox/MainSplit/SettingsSplit/ToolSplit" instance=ExtResource( 7 )]
@@ -266,14 +275,14 @@ margin_bottom = 108.0
 [node name="ToolSettingsPanel" parent="VBox/MainSplit/SettingsSplit/ToolSplit" instance=ExtResource( 4 )]
 margin_top = 120.0
 margin_right = 310.0
-margin_bottom = 198.0
+margin_bottom = 184.0
 
 [node name="MainViewport" parent="VBox/MainSplit" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 322.0
 margin_right = 954.0
-margin_bottom = 482.0
+margin_bottom = 468.0
 
 [node name="GlobalDialogs" type="Control" parent="."]
 margin_left = 3.0
