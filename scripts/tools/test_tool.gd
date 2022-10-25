@@ -7,20 +7,12 @@ func _init() -> void:
 	name = "Test Tool"
 	icon = load("res://scripts/tools/test_tool_icon.png")
 	
-	tool_type = "test_tool"
-	tool_is_builtin = true
+	self.add_prop("test_int", int_prop(3, 0, 6, 1))
+	self.add_prop("test_float", float_prop(1.234, -2, 2))
+	self.add_prop("test_tip", brush_tip_prop(BrushTip.new()))
+	self.add_prop("test_bool", bool_prop(false))
+	self.add_prop("test_choice", choice_prop(0, ['aaa', 'bbb', 'ccc']))
 	
-	displayed_props = {
-		"test_int": int_prop(3, 0, 6, 1),
-		"test_float": float_prop(1.234, -2, 2, 0.3),
-	}
-	
-func duplicate():
-	var new_tool = load("res://scripts/tools/test_tool.gd").new()
-	new_tool.copy(self)
-	return new_tool
-
-
 # draw related, must override
 func activate(active: bool):
 	pass
@@ -40,7 +32,12 @@ func pen_move(uv: Vector2):
 func _draw_pixel(uv):
 	var layer = DocumentManager.draw_buffer_layer
 	var img = layer.image
-	img.lock()
-	img.set_pixelv(uv, ToolManager.get_prime_color())
-	img.unlock()
-	DocumentManager.queue_render_skin()
+	
+	var img_size = img.get_size()
+	var img_rect = Rect2(0, 0, img_size.x, img_size.y)
+	
+	if img_rect.has_point(uv):
+		img.lock()
+		img.set_pixelv(uv, ToolManager.get_prime_color())
+		img.unlock()
+		DocumentManager.queue_render_skin()

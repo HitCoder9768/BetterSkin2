@@ -10,22 +10,12 @@ variables that can be modified:
 		the display name of the tool, format should be "tool_name"
 	icon:
 		a texture type to be displayed
-	tool_type:
-		a string used to identify the class, format should be "class_name"
-	tool_is_builtin:
-		if true, the tool cannot be deleted from the ui
-	displayed_props:
-		ToolProp objects, that will be displayed on the ui
 
 must override functions:
-	draw related:
-		activate(active: bool)
-		pen_down(uv: Vector2)
-		pen_up(uv: Vector2)
-		pen_move(uc: Vector2)
-	
-	other:
-		duplicate()
+	activate(active: bool)
+	pen_down(uv: Vector2)
+	pen_up(uv: Vector2)
+	pen_move(uc: Vector2)
 
 """
 
@@ -35,27 +25,26 @@ var name: String
 var icon: Texture
 
 
-# tool type str used to identify tool class when saving and loading
-var tool_type: String
-# labels for tool grouping, ie builtin or user-defined
-var tool_is_builtin: bool = true
-
 # define the displayed property list
 # does not hold actual value
-var displayed_props: Dictionary
-
+var _displayed_props: Dictionary
 # dict that actually hold property values
-var _properties: Dictionary = {}
+var _props: Dictionary = {}
 
+# add a property to the tool display panel
+func add_prop(name: String, prop: ToolProp) -> void:
+	_displayed_props[name] = prop
+	self.set_prop(name, prop.value_default)
 
+# set the value of a tool property
 func set_prop(prop_name, value) -> void:
-	_properties[prop_name] = value
+	_props[prop_name] = value
 	ToolManager.announce_tool_modified(self)
 
 func get_prop(prop_name):
-	if prop_name in _properties:
-		return _properties[prop_name]
-	var property = displayed_props[prop_name] as ToolProp
+	if prop_name in _props:
+		return _props[prop_name]
+	var property = _displayed_props[prop_name] as ToolProp
 	return property.value_default
 
 
@@ -69,42 +58,42 @@ func pen_up(uv: Vector2):
 func pen_move(uv: Vector2):
 	assert(false, "unimplemented")
 
-
-func duplicate():
-	assert(false, "unimplemented")
-func copy(other):
-	name = other.name
-	icon = other.icon
-	tool_type = other.tool_type
-	tool_is_builtin = other.tool_is_builtin
-	displayed_props = other.displayed_props.duplicate()
-	_properties = other._properties.duplicate()
-
-
-# save & loading
-func to_dict() -> Dictionary:
-	var save_properties = _properties.duplicate()
-	for key in save_properties.keys():
-		var value = save_properties[key]
-		if value is BrushTip:
-			save_properties[key] = value.to_dict()
-	var save_dict = {
-		'name': name,
-		'tool_type': tool_type,
-		'properties': save_properties,
-	}
-	return save_dict
-func load_dict(dict: Dictionary):
-	name = dict['name']
-	tool_type = dict['tool_type']
-	_properties = dict['properties']
-	for key in _properties.keys():
-		var value = _properties[key]
-		if value is Dictionary: # special object
-			if value['type'] == 'brush_tip':
-				var brush_tip = BrushTip.new()
-				brush_tip.load_dict(value)
-				_properties[key] = brush_tip
+#
+#func duplicate():
+#	assert(false, "unimplemented")
+#func copy(other):
+#	name = other.name
+#	icon = other.icon
+#	tool_type = other.tool_type
+#	tool_is_builtin = other.tool_is_builtin
+#	displayed_props = other.displayed_props.duplicate()
+#	_properties = other._properties.duplicate()
+#
+#
+## save & loading
+#func to_dict() -> Dictionary:
+#	var save_properties = _properties.duplicate()
+#	for key in save_properties.keys():
+#		var value = save_properties[key]
+#		if value is BrushTip:
+#			save_properties[key] = value.to_dict()
+#	var save_dict = {
+#		'name': name,
+#		'tool_type': tool_type,
+#		'properties': save_properties,
+#	}
+#	return save_dict
+#func load_dict(dict: Dictionary):
+#	name = dict['name']
+#	tool_type = dict['tool_type']
+#	_properties = dict['properties']
+#	for key in _properties.keys():
+#		var value = _properties[key]
+#		if value is Dictionary: # special object
+#			if value['type'] == 'brush_tip':
+#				var brush_tip = BrushTip.new()
+#				brush_tip.load_dict(value)
+#				_properties[key] = brush_tip
 
 
 # convenience functions for building property list
@@ -119,17 +108,16 @@ static func int_prop(default, val_min, val_max, val_step):
 	prop.value_step = val_step
 	return prop
 
-static func float_prop(default, val_min, val_max, val_step):
+static func float_prop(default, val_min, val_max):
 	var prop = ToolProp.new()
 	prop.prop_type = ToolProp.FLOAT
 	prop.value_default = default
 	
 	prop.value_min = val_min
 	prop.value_max = val_max
-	prop.value_step = val_step
 	return prop
 
-static func brush_tip_prop(default):
+static func brush_tip_prop(default: BrushTip):
 	var prop = ToolProp.new()
 	prop.prop_type = ToolProp.BRUSH_TIP
 	prop.value_default = default
